@@ -25,10 +25,6 @@ import javax.ws.rs.core.Response;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.entities.Categoria;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.facades.CategoriaFacade;
 
-/**
- *
- * @author cristian
- */
 @Stateless
 @Path("categoria")
 public class CategoriaFacadeREST implements Serializable {
@@ -44,7 +40,7 @@ public class CategoriaFacadeREST implements Serializable {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(String jsonString) {
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        if (catFacade.create(new Categoria(null, json.get("nombreCat").getAsString(), json.get("activoCat").getAsBoolean(), json.get("descripcionCat").getAsString()))) {
+        if (catFacade.create(new Categoria(null, json.get("nombreCat").getAsString(), json.get("activoCat").getAsBoolean(), json.get("descripcion").getAsString()))) {
             return Response.status(Response.Status.OK).header("mensaje", "se creo con exito").build();
         } else {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("mensaje", "Sin exito").build();
@@ -56,7 +52,7 @@ public class CategoriaFacadeREST implements Serializable {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id") Integer id, String jsonString) {
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        if (catFacade.edit(new Categoria(json.get("idCat").getAsInt(), json.get("nombreCat").getAsString(), json.get("activoCat").getAsBoolean(), json.get("descripcionCat").getAsString()))) {
+        if (catFacade.edit(new Categoria(json.get("idCategoria").getAsInt(), json.get("nombreCat").getAsString(), json.get("activoCat").getAsBoolean(), json.get("descripcion").getAsString()))) {
             return Response.status(Response.Status.OK).header("mensaje", "se Modifico con exito").build();
         } else {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("mensaje", "Sin exito").build();

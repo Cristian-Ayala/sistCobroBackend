@@ -10,11 +10,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.entities.Orden;
+import org.apache.commons.lang.RandomStringUtils;
 
-/**
- *
- * @author cristian
- */
 @Stateless
 @LocalBean
 public class OrdenFacade extends AbstractFacade<Orden> implements GenericLocalInterface<Orden> {
@@ -30,5 +27,14 @@ public class OrdenFacade extends AbstractFacade<Orden> implements GenericLocalIn
     public OrdenFacade() {
         super(Orden.class);
     }
-    
+
+    public String generateUniqueId() {
+        boolean idUnique = true;
+        String idOrden = "";
+        while (idUnique) {
+            idOrden = RandomStringUtils.randomAlphanumeric(20);
+            idUnique = !getEntityManager().createQuery("SELECT n from Orden n WHERE n.idOrden=:id").setParameter("id", idOrden).getResultList().isEmpty();
+        }
+        return idOrden;
+    }
 }

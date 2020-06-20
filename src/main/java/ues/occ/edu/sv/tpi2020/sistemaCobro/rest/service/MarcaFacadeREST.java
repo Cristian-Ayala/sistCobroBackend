@@ -25,10 +25,6 @@ import javax.ws.rs.core.Response;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.entities.Marca;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.facades.MarcaFacade;
 
-/**
- *
- * @author cristian
- */
 @Stateless
 @Path("marca")
 public class MarcaFacadeREST implements Serializable {

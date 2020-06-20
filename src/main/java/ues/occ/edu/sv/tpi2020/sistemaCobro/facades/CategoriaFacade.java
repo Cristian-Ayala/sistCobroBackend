@@ -11,10 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.entities.Categoria;
 
-/**
- *
- * @author cristian
- */
 @Stateless
 @LocalBean
 public class CategoriaFacade extends AbstractFacade<Categoria> implements GenericLocalInterface<Categoria> {

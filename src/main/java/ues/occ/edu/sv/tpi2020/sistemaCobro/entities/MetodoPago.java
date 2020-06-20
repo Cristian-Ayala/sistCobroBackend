@@ -19,10 +19,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author cristian
- */
 @Entity
 @Table(name = "metodo_pago", catalog = "nointeres", schema = "")
 @XmlRootElement

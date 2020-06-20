@@ -11,10 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.entities.Marca;
 
-/**
- *
- * @author cristian
- */
 @Stateless
 @LocalBean
 public class MarcaFacade extends AbstractFacade<Marca> implements GenericLocalInterface<Marca> {

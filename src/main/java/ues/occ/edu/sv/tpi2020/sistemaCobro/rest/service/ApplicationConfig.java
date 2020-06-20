@@ -8,10 +8,6 @@ package ues.occ.edu.sv.tpi2020.sistemaCobro.rest.service;
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
-/**
- *
- * @author cristian
- */
 @javax.ws.rs.ApplicationPath("rest-resources")
 public class ApplicationConfig extends Application {
 
@@ -31,7 +27,6 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(ues.occ.edu.sv.tpi2020.sistemaCobro.CORS.NewCrossOriginResourceSharingFilter.class);
         resources.add(ues.occ.edu.sv.tpi2020.sistemaCobro.rest.service.CategoriaFacadeREST.class);
-        resources.add(ues.occ.edu.sv.tpi2020.sistemaCobro.rest.service.DetalleOrdenFacadeREST.class);
         resources.add(ues.occ.edu.sv.tpi2020.sistemaCobro.rest.service.MarcaFacadeREST.class);
         resources.add(ues.occ.edu.sv.tpi2020.sistemaCobro.rest.service.MetodoPagoFacadeREST.class);
         resources.add(ues.occ.edu.sv.tpi2020.sistemaCobro.rest.service.OrdenFacadeREST.class);

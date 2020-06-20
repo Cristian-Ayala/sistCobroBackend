@@ -6,10 +6,16 @@
 package ues.occ.edu.sv.tpi2020.sistemaCobro.facades;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 public abstract class AbstractFacade<T> {
 
@@ -44,6 +50,7 @@ public abstract class AbstractFacade<T> {
                 return false;
             }
         } catch (Exception e) {
+            beanValidation(entity);
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             return false;
         }
@@ -54,13 +61,13 @@ public abstract class AbstractFacade<T> {
      * Este método es para editar algún objeto
      *
      * @param entity es la entidad
-     * @return <b>True</b>: Si se pudo crear <br><b>False</b>: Si hubo algún
+     * @return <b>True</b>: Si se pudo editar <br><b>False</b>: Si hubo algún
      * error o algo es nulo
      */
     public boolean edit(T entity) {
         EntityManager em = getEntityManager();
         try {
-            if (em != null && entity != null) {
+            if (entity != null && em != null) {
                 em.merge(entity);
                 return true;
             } else {
@@ -68,6 +75,7 @@ public abstract class AbstractFacade<T> {
                 return false;
             }
         } catch (Exception e) {
+            beanValidation(entity);
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             return false;
         }
@@ -77,7 +85,7 @@ public abstract class AbstractFacade<T> {
      * Este método es para eliminar un objeto
      *
      * @param entity es la entidad
-     * @return <b>True</b>: Si se pudo crear <br><b>False</b>: Si hubo algún
+     * @return <b>True</b>: Si se pudo eliminar <br><b>False</b>: Si hubo algún
      * error o algo es nulo
      */
     public boolean remove(T entity) {
@@ -91,6 +99,7 @@ public abstract class AbstractFacade<T> {
                 return false;
             }
         } catch (Exception e) {
+            beanValidation(entity);
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             return false;
         }
@@ -193,6 +202,29 @@ public abstract class AbstractFacade<T> {
             return 0;
         }
 
+    }
+
+    /**
+     * Este método se encarga de validar los datos que se registran en el bean,
+     * y verifica que sean válidos. Cómo por ejemplo, si En alguna tabla hay un
+     * dato que no tiene que ser mayor a 20 y tiene que ser un string, y el dato
+     * ingresado es mayor (en longitud) a 20 o es de otro tipo, arrojará un
+     * error donde da la razón y el campo que violó la validación, ya sea porque
+     * es de otro dato o porque es mayor a 20
+     *
+     * @param entity Es la entidad que se está evaluando
+     */
+    public void beanValidation(T entity) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
+        if (constraintViolations.size() > 0) {
+            Iterator<ConstraintViolation<T>> iterator = constraintViolations.iterator();
+            while (iterator.hasNext()) {
+                ConstraintViolation<T> cv = iterator.next();
+                System.err.println(cv.getRootBeanClass().getName() + "." + cv.getPropertyPath() + " " + cv.getMessage());
+            }
+        }
     }
 
 }

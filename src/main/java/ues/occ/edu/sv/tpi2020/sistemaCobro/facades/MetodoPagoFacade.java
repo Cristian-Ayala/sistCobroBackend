@@ -11,10 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.entities.MetodoPago;
 
-/**
- *
- * @author cristian
- */
 @Stateless
 @LocalBean
 public class MetodoPagoFacade extends AbstractFacade<MetodoPago> implements GenericLocalInterface<MetodoPago> {

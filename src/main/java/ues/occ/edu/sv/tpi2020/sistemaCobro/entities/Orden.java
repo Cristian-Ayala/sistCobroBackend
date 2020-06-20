@@ -8,6 +8,7 @@ package ues.occ.edu.sv.tpi2020.sistemaCobro.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.inject.Inject;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -26,6 +27,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import ues.occ.edu.sv.tpi2020.sistemaCobro.facades.MetodoPagoFacade;
 
 
 @Entity
@@ -81,13 +83,15 @@ public class Orden implements Serializable {
     public Orden(String idOrden) {
         this.idOrden = idOrden;
     }
-
-    public Orden(String idOrden, Date fechaOrd, double totalOrden, String nombreCliente, boolean activoOrden) {
+                    //`id_orden`, `fecha_ord`, `total_orden`, `nombre_cliente`, `id_metodo_pago`, `activoOrden`, `observaciones_orden
+    public Orden(String idOrden, Date fechaOrd, double totalOrden, String nombreCliente, MetodoPago idMetodoPago, boolean activoOrden, String observaciones) {
         this.idOrden = idOrden;
         this.fechaOrd = fechaOrd;
         this.totalOrden = totalOrden;
         this.nombreCliente = nombreCliente;
+        this.idMetodoPago = idMetodoPago;
         this.activoOrden = activoOrden;
+        this.observacionesOrden = observaciones;
     }
 
     public String getIdOrden() {

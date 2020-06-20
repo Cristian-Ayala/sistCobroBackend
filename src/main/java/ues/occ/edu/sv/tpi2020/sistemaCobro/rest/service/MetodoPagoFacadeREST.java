@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -26,10 +25,6 @@ import javax.ws.rs.core.Response;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.entities.MetodoPago;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.facades.MetodoPagoFacade;
 
-/**
- *
- * @author cristian
- */
 @Stateless
 @Path("metodoPago")
 public class MetodoPagoFacadeREST implements Serializable {
@@ -45,7 +40,7 @@ public class MetodoPagoFacadeREST implements Serializable {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(String jsonString) {
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        if (metPagoFacade.create(new MetodoPago(null, json.get("nombrePago").getAsString(), json.get("activoPago").getAsBoolean(), json.get("descripcionPago").getAsString()))) {
+        if (metPagoFacade.create(new MetodoPago(null, json.get("nombrePago").getAsString(), json.get("activoMet").getAsBoolean(), json.get("descripcionMetodo").getAsString()))) {
             return Response.status(Response.Status.OK).header("mensaje", "se creo con exito").build();
         } else {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("mensaje", "Sin exito").build();
@@ -57,7 +52,7 @@ public class MetodoPagoFacadeREST implements Serializable {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(String jsonString) {
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        if (metPagoFacade.edit(new MetodoPago(json.get("idPago").getAsInt(), json.get("nombrePago").getAsString(), json.get("activoPago").getAsBoolean(), json.get("descripcionPago").getAsString()))) {
+        if (metPagoFacade.edit(new MetodoPago(json.get("idMetodoPago").getAsInt(), json.get("nombrePago").getAsString(), json.get("activoMet").getAsBoolean(), json.get("descripcionMetodo").getAsString()))) {
             return Response.status(Response.Status.OK).header("mensaje", "se edito con exito").build();
         } else {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("mensaje", "Sin exito").build();

@@ -8,11 +8,6 @@ package ues.occ.edu.sv.tpi2020.sistemaCobro.facades;
 import java.util.List;
 import javax.ejb.Local;
 
-/**
- *
- * @author cristian
- * @param <T>
- */
 @Local
 public interface GenericLocalInterface<T> {
 

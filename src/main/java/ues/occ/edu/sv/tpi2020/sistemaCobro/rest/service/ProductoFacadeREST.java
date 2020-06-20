@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -26,10 +25,6 @@ import javax.ws.rs.core.Response;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.entities.Producto;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.facades.ProductoFacade;
 
-/**
- *
- * @author cristian
- */
 @Stateless
 @Path("producto")
 public class ProductoFacadeREST implements Serializable {
@@ -45,7 +40,7 @@ public class ProductoFacadeREST implements Serializable {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(String jsonString) {
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        if (prodFacade.create(new Producto(json.get("upc").getAsString(), json.get("nombreProd").getAsString(), json.get("precioProd").getAsFloat(), json.get("descripcionProd").getAsString(), json.get("stockProd").getAsInt(), json.get("activoProd").getAsBoolean(), json.get("idCategoria").getAsInt(), json.get("idMarca").getAsInt()))) {
+        if (prodFacade.create(new Producto(json.get("upc").getAsString(), json.get("nombreProd").getAsString(), json.get("precioUnit").getAsFloat(), json.get("descripcion").getAsString(), json.get("stockProd").getAsInt(), json.get("activoProd").getAsBoolean(), json.get("idCategoria").getAsInt(), json.get("idMarca").getAsInt()))) {
             return Response.status(Response.Status.OK).header("mensaje", "se creo con exito").build();
         } else {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("mensaje", "Sin exito").build();
@@ -57,7 +52,7 @@ public class ProductoFacadeREST implements Serializable {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(String jsonString) {
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        if (prodFacade.edit(new Producto(json.get("upc").getAsString(), json.get("nombreProd").getAsString(), json.get("precioProd").getAsFloat(), json.get("descripcionProd").getAsString(), json.get("stockProd").getAsInt(), json.get("activoProd").getAsBoolean(), json.get("idCategoria").getAsInt(), json.get("idMarca").getAsInt()))) {
+        if (prodFacade.edit(new Producto(json.get("upc").getAsString(), json.get("nombreProd").getAsString(), json.get("precioUnit").getAsFloat(), json.get("descripcion").getAsString(), json.get("stockProd").getAsInt(), json.get("activoProd").getAsBoolean(), json.get("idCategoria").getAsInt(), json.get("idMarca").getAsInt()))) {
             return Response.status(Response.Status.OK).header("mensaje", "se creo con exito").build();
         } else {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("mensaje", "Sin exito").build();

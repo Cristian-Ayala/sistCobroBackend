@@ -11,10 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import ues.occ.edu.sv.tpi2020.sistemaCobro.entities.Producto;
 
-/**
- *
- * @author cristian
- */
 @Stateless
 @LocalBean
 public class ProductoFacade extends AbstractFacade<Producto> implements GenericLocalInterface<Producto> {
