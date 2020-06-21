@@ -27,8 +27,8 @@ public class DetalleOrdenFacade extends AbstractFacade<DetalleOrden> implements 
         super(DetalleOrden.class);
     }
     
-    public DetalleOrden getEntityByID(String upc, String idOrden){
-        getEntityManager().createQuery("SELECT n from Orden n WHERE n.idOrden=:id").setParameter("id", idOrden).getResultList().isEmpty();
-        return null;
-    }
+//    public DetalleOrden getEntityByID(String upc, String idOrden){
+//        getEntityManager().createQuery("SELECT n from Orden n WHERE n.idOrden=:id").setParameter("id", idOrden).getResultList().isEmpty();
+//        return null;
+//    }
 }

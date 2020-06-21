@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
 @Entity
 @Table(name = "detalle_orden", catalog = "nointeres", schema = "")
 @NamedQueries({
@@ -58,10 +57,11 @@ public class DetalleOrden implements Serializable {
         this.detalleOrdenPK = detalleOrdenPK;
     }
 
-    public DetalleOrden(DetalleOrdenPK detalleOrdenPK, int cantidadProd, float precioUnit) {
+    public DetalleOrden(DetalleOrdenPK detalleOrdenPK, int cantidadProd, float precioUnit, int descuento) {
         this.detalleOrdenPK = detalleOrdenPK;
         this.cantidadProd = cantidadProd;
         this.precioUnit = precioUnit;
+        this.descuento = descuento;
     }
 
     public DetalleOrden(String idOrden, String upc) {
@@ -137,5 +137,5 @@ public class DetalleOrden implements Serializable {
     public String toString() {
         return "ues.occ.edu.sv.tpi2020.sistemaCobro.entities.DetalleOrden[ detalleOrdenPK=" + detalleOrdenPK + " ]";
     }
-    
+
 }
